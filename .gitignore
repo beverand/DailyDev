@@ -1,2 +1,6 @@
 .env
 node_modules
+test.js
+readQs.js
+jsonQ.json
+Questions.txt
