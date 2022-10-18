@@ -2,9 +2,15 @@ h1{
     color: red;
 }
 .completed{
-    text-decoration: line-through;
-    color: gray;
+    text-decoration: none;
+    color:black;
 }
 .not{
-    text-decoration: underline;
+    text-decoration: none;
+    color: darkblue;
+    font-style: italic;
+}
+
+.hidden{
+    visibility: collapse;
 }
