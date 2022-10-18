@@ -8,22 +8,25 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>Todos</h1>
+    <h1>Questions</h1>
+    <h2><%= user.userName %> has <%= total %> total, with <%= left %> answered.</h2>   
     <ul>
     <% todos.forEach( el => { %>
             <li class='todoItem' data-id='<%=el._id%>'>
-                <span class='<%= el.completed === true ? 'completed' : 'not'%>'><%= el.todo %></span>
+                <span> <%= el.qtype %> </span>
+                <span class='<%= el.response ? 'completed' : 'not'%>'><%= el.todo %></span>
                 <span class='ans'> Answer </span>
                 <span class='rev'> Review </span>
-                <span class='del'> Delete </span>
+                <span class='<%= el.qsource == 'self' ? 'completed' : 'hidden'%>'> Delete </span>
             </li>
     <% }) %>    
     </ul>
 
-    <h2><%= user.userName %> has <%= left %> questions to answer.</h2>
+ 
 
     <form action="/todos/createTodo" method='POST'>
         <input type="text" placeholder="Enter Todo Item" name='todoItem'>
+        <textarea id="newAns" name="newAns" rows="5" cols="40"></textarea>
         <input type="submit">
     </form>
 
