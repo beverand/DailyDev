@@ -7,50 +7,53 @@ module.exports = {
         //console.log(req.user)
         try{
             const todoItems = await Todo.find({userId:req.user.id})
-            const itemLeft = await Todo.countDocuments({userId:req.user.id,completed: false})
+            //const itemLeft = await Todo.countDocuments({userId:req.user.id,completed: false})
             const n = await User.find({_id:req.user._id}).select('questions')
             const m = await User.countDocuments({_id:req.user._id}).select('questions.Object.question')
-            //console.log(JSON.stringify(n))
-            //console.log(typeof n)
             let r = n[0].questions
             let itemsLeft = 0
             let o = []
-            // let dataObject = {_id: 'test', complete: false};
-            // o[0] = dataObject
-            //console.log(o[0]._id)
-            let counter = 0
-            for (x in r){
-                //console.log(n[0].questions[x].question + ': '+ n[0].questions[x].response) //=== 0? itemsLeft+1: 
-                counter+=1
-                if(n[0].questions[x].response){
-                  itemsLeft + 0   
-                } else 
-                {
-                  itemsLeft++
-                  let dataObject = {};
-                  dataObject['_id'] = r[x];
-                  //console.log()
-                  dataObject["todo"] = r[x].question
-                  dataObject['completed'] = false;
-                  dataObject['userId'] = req.user._id
-                  o.push(dataObject);
-                }                
+            for (x in n[0].questions){
+                n[0].questions[x].response? itemsLeft + 0 : itemsLeft++
+                let dataObject = {};
+                dataObject['_id'] = r[x];      
+                dataObject["todo"] = r[x].question
+                dataObject['response'] = r[x].response;
+                dataObject['userId'] = req.user._id
+                dataObject['qsource'] = r[x].qsource
+                dataObject['qtype'] = r[x].qtype
+                o.push(dataObject);                             
             }
             let todoItem = o
-            console.log(itemsLeft)
-            console.log(JSON.stringify(todoItem))
-            console.log(typeof o, Array.isArray(o))
-            console.log(typeof todoItems,  Array.isArray(todoItems))
-            res.render('todos.ejs', {todos: todoItem, left: itemsLeft, user: req.user})
+            res.render('todos.ejs', {todos: todoItem, total: n[0].questions.length, user: req.user, left: n[0].questions.length - itemsLeft})
         }catch(err){
             console.log(err)
         }
     },
     createTodo: async (req, res)=>{
         try{
-            await Todo.create({todo: req.body.todoItem, completed: false, userId: req.user.id})
-            console.log('Todo has been added!')
-            res.redirect('/todos')
+            await Todo.create({
+                todo: req.body.todoItem, completed: false, userId: req.user.id,
+            })
+            
+            let newQ = await Question.create({
+                question: req.body.todoItem, 
+                userId: req.user.id, 
+                response: req.body.newAns,
+                qtype: 'undefined',
+                qsource: 'self'
+            })
+
+            await User.updateOne(
+                { "_id": req.user.id },
+                {
+                    $push: {
+                        questions: newQ
+                    }
+                }
+            );
+            console.log('Question has been added!')
+            await res.redirect('/todos')
         }catch(err){
             console.log(err)
         }
