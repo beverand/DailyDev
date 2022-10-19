@@ -8,11 +8,11 @@ Array.from(deleteBtn).forEach((el)=>{
     el.addEventListener('click', deleteTodo)
 })
 
-Array.from(todoItem).forEach((el)=>{
+Array.from(reviewBtn).forEach((el)=>{
     el.addEventListener('click', reviewTodo)
 })
 
-Array.from(deleteBtn).forEach((el)=>{
+Array.from(answerBtn).forEach((el)=>{
     el.addEventListener('click', answerTodo)
 })
 

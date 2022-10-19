@@ -16,10 +16,9 @@ module.exports = {
             for (x in n[0].questions){
                 n[0].questions[x].response? itemsLeft + 0 : itemsLeft++
                 let dataObject = {};
-                dataObject['_id'] = r[x];      
-                dataObject["todo"] = r[x].question
-                dataObject['response'] = r[x].response;
-                dataObject['userId'] = req.user._id
+                dataObject['_id'] = r[x]._id  
+                dataObject['todo'] = r[x].question
+                dataObject['response'] = r[x].response
                 dataObject['qsource'] = r[x].qsource
                 dataObject['qtype'] = r[x].qtype
                 o.push(dataObject);                             
@@ -38,7 +37,6 @@ module.exports = {
             
             let newQ = await Question.create({
                 question: req.body.todoItem, 
-                userId: req.user.id, 
                 response: req.body.newAns,
                 qtype: 'undefined',
                 qsource: 'self'
@@ -83,7 +81,8 @@ module.exports = {
     deleteTodo: async (req, res)=>{
         console.log(req.body.todoIdFromJSFile)
         try{
-            await Todo.findOneAndDelete({_id:req.body.todoIdFromJSFile})
+            //await Todo.findOneAndDelete({_id:req.body.todoIdFromJSFile})
+            await Question.findOneAndDelete({_id:req.body.todoIdFromJSFile})
             console.log('Deleted Todo')
             res.json('Deleted It')
         }catch(err){
