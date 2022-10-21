@@ -13,18 +13,19 @@
     <ul>
     <% todos.forEach( el => { %>
             <li class='todoItem' data-id='<%=el._id%>'>
-                <span> <%= el.qtype %> </span>
-                <span class='<%= el.response ? 'completed' : 'not'%>'><%= el.todo %></span>
-                <span class='ans'> Answer </span>
-                <span class='rev'> Review </span>
-                <span class='<%= el.qsource == 'self' ? 'completed del' : 'hidden'%>'> Delete </span>
+               <p> 
+                    <span> <%= el.qtype %> </span>
+                    <span class='<%= el.response ? 'completed' : 'not'%>'><%= el.todo %></span>
+                    <span class='ans'> Answer </span>
+                    <span class='rev'> Review </span>
+                    <span class='<%= el.qsource == 'self' ? 'completed del' : 'hidden'%>'> Delete </span>
+               </p>
+                <textarea id="qAns" name="qAns" rows="5" cols="60" hidden><%= el.response %></textarea>
             </li>
     <% }) %>    
     </ul>
 
- 
-
-    <form action="/todos/createTodo" method='POST'>
+    <form action="/todos/createTodo" method='POST' class='<%= total < 200 ? 'completed' : 'hidden'%>'>
         <p><input type="text" placeholder="Enter Todo Item" name='todoItem'></p>
         <textarea id="newAns" name="newAns" rows="5" cols="40"></textarea>
         <input type="submit">
