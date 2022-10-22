@@ -38,7 +38,7 @@ async function deleteTodo(){
 
 async function answerTodo(){
     const todoId = this.parentNode.dataset.id
-    
+    toggle('qAns'+todoId)
     try{
         const response = await fetch('todos/answerTodo', {
             method: 'put',
@@ -71,4 +71,12 @@ async function reviewTodo(){
     }catch(err){
         console.log(err)
     }
+}
+
+function toggle(x) {
+	if (document.getElementById(x).style.display == 'none') {
+		document.getElementById(x).style.display = '';
+	} else {
+		document.getElementById(x).style.display = 'none';
+	}
 }
