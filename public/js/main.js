@@ -1,8 +1,8 @@
 const deleteBtn = document.querySelectorAll('.del')
 const reviewBtn = document.querySelectorAll('.rev')
 const answerBtn = document.querySelectorAll('.ans')
-const todoItem = document.querySelectorAll('span.not')
-const todoComplete = document.querySelectorAll('span.completed')
+// const todoItem = document.querySelectorAll('span.not')
+// const todoComplete = document.querySelectorAll('span.completed')
 
 Array.from(deleteBtn).forEach((el)=>{
     el.addEventListener('click', deleteTodo)
@@ -18,6 +18,8 @@ Array.from(answerBtn).forEach((el)=>{
 
 async function deleteTodo(){
     const todoId = this.parentNode.dataset.id
+    console.log('Clicked')
+    console.log(JSON.stringify(this.parentNode.dataset))
     try{
         const response = await fetch('todos/deleteTodo', {
             method: 'delete',

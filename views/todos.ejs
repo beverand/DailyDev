@@ -12,14 +12,13 @@
     <h2><%= user.userName %> has <%= total %> total, with <%= left %> answered.</h2>   
     <ul>
     <% todos.forEach( el => { %>
-            <li class='todoItem' data-id='<%=el._id%>'>
-               <p> 
+            <li class='todoItem' data-id='<%=el._id%>'>   
                     <span> <%= el.qtype %> </span>
                     <span class='<%= el.response ? 'completed' : 'not'%>'><%= el.todo %></span>
                     <span class='ans'> Answer </span>
                     <span class='rev'> Review </span>
                     <span class='<%= el.qsource == 'self' ? 'completed del' : 'hidden'%>'> Delete </span>
-               </p>
+                    <br>
                 <textarea id="qAns" name="qAns" rows="5" cols="60" hidden><%= el.response %></textarea>
             </li>
     <% }) %>    
