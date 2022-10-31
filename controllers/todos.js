@@ -64,7 +64,7 @@ module.exports = {
     answerTodo: async (req, res)=>{
         console.log(req.body.todoIdFromJSFile, req.body.respTextArea)    
         try{
-            await User.findOneAndUpdateOne(
+            await User.findOneAndUpdate(
                 {_id: req.user.id , "questions._id": req.body.todoIdFromJSFile } ,
                   {
                     $set: {"questions.response": req.body.respTextArea}
