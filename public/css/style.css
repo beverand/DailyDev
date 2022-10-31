@@ -22,6 +22,10 @@ h1{
     background-color: lightblue;
 }
 
+.questionForm{
+    width: 80%
+}
+
 .hidden{
     visibility: collapse;
 }
@@ -32,4 +36,9 @@ header{
     background: #333;
     color: #fff;
     top: 0;
+}
+
+.logout{
+    margin: auto 90%;
+    padding: 5px;
 }

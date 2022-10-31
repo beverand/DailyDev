@@ -11,6 +11,7 @@
     <header>
         <h1>Questions</h1>
         <h2><%= user.userName %> has <%= total %> total, with <%= left %> answered.</h2>
+        <a href="/logout" class="logout ansBtn">Logout</a>
     </header>       
     <ul>
     <% todos.forEach( el => { %>
@@ -21,20 +22,20 @@
                     <span class='rev'> Review </span>
                     <span class='<%= el.qsource == 'self' ? 'completed del' : 'hidden'%>'> Delete </span>
                     <br>
-                <textarea id="qAns<%= el._id %>" name="qAns" rows="5" cols="60" style="display:none;"><%= el.response %></textarea>
+                <textarea id="qAns<%= el._id %>" name="qAns" rows="5" cols="60" class="questionForm" style="display:none;"><%= el.response %></textarea>
                 <span id="saveAns<%= el._id %>" class="ansBtn" style="display:none;">Save Answer</span>
             </li>
     <% }) %>    
     </ul>
 
     <form action="/todos/createTodo" method='POST' class='<%= total < 200 ? 'completed' : 'hidden'%>'>
-        <input type="text" placeholder="Enter Question" name='todoItem' width="100px">
+        <input type="text" placeholder="Enter Question" name='todoItem' width="100px" class="questionForm">
        <br>
-        <textarea id="newAns" name="newAns" rows="5" cols="40"></textarea>
+        <textarea id="newAns" name="newAns" placeholder="Answer goes here" rows="5" cols="40" class="questionForm"></textarea>
         <input type="submit">
     </form>
 
-    <a href="/logout">Logout</a>
+    
 
     <script src="js/main.js"></script>
 </body>
