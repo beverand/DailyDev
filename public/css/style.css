@@ -1,3 +1,6 @@
+body{        
+    padding-top: 130px;
+}
 h1{
     color: red;
 }
@@ -5,12 +8,28 @@ h1{
     text-decoration: none;
     color:black;
 }
+
 .not{
     text-decoration: none;
     color: darkblue;
     font-style: italic;
 }
 
+.ansBtn{
+    border: 1px solid black;
+    padding: 3px;
+    border-radius: 10px;
+    background-color: lightblue;
+}
+
 .hidden{
     visibility: collapse;
+}
+
+header{
+    width: 100%;
+    position: fixed;        
+    background: #333;
+    color: #fff;
+    top: 0;
 }

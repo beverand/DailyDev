@@ -8,8 +8,10 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>Questions</h1>
-    <h2><%= user.userName %> has <%= total %> total, with <%= left %> answered.</h2>   
+    <header>
+        <h1>Questions</h1>
+        <h2><%= user.userName %> has <%= total %> total, with <%= left %> answered.</h2>
+    </header>       
     <ul>
     <% todos.forEach( el => { %>
             <li class='todoItem' data-id='<%=el._id%>'>   
@@ -20,6 +22,7 @@
                     <span class='<%= el.qsource == 'self' ? 'completed del' : 'hidden'%>'> Delete </span>
                     <br>
                 <textarea id="qAns<%= el._id %>" name="qAns" rows="5" cols="60" style="display:none;"><%= el.response %></textarea>
+                <span id="saveAns<%= el._id %>" class="ansBtn" style="display:none;">Save Answer</span>
             </li>
     <% }) %>    
     </ul>

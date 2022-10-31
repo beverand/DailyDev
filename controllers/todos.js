@@ -1,13 +1,10 @@
 const Question = require('../models/Question')
-const Todo = require('../models/Todo')
+//const Todo = require('../models/Todo')
 const User = require('../models/User')
 
 module.exports = {
     getTodos: async (req,res)=>{
-        //console.log(req.user)
         try{
-            const todoItems = await Todo.find({userId:req.user.id})
-            //const itemLeft = await Todo.countDocuments({userId:req.user.id,completed: false})
             const n = await User.find({_id:req.user._id}).select('questions')
             const m = await User.countDocuments({_id:req.user._id}).select('questions.Object.question')
             let r = n[0].questions
@@ -55,11 +52,8 @@ module.exports = {
         }
     },
     deleteTodo: async (req, res)=>{
-        console.log('deltodo',req.body.todoIdFromJSFile)
-        const todoall = req.body
-        console.log(JSON.stringify(todoall))
+        //console.log('deltodo',req.body.todoIdFromJSFile)
         try{
-            //await Todo.findOneAndDelete({_id:req.body.todoIdFromJSFile})
             await User.updateOne({ _id: req.user.id }, { $pull: { "questions": { _id: req.body.todoIdFromJSFile } } })
             console.log('Deleted Question')
             res.json('Deleted It')
@@ -68,9 +62,14 @@ module.exports = {
         }
     },
     answerTodo: async (req, res)=>{
-        console.log(req.body.todoIdFromJSFile)
+        console.log(req.body.todoIdFromJSFile, req.body.respTextArea)    
         try{
-            await Todo.findOneAndUpdate({_id:req.body.todoIdFromJSFile})
+            await User.findOneAndUpdateOne(
+                {_id: req.user.id , "questions._id": req.body.todoIdFromJSFile } ,
+                  {
+                    $set: {"questions.response": req.body.respTextArea}
+                  }
+            )
             console.log('Answer Todo')
             res.json('Answer It')
         }catch(err){
@@ -80,7 +79,7 @@ module.exports = {
     reviewTodo: async (req, res)=>{
         console.log(req.body.todoIdFromJSFile)
         try{
-            await Todo.findOne({_id:req.body.todoIdFromJSFile})
+            await User.findOne({_id:req.body.todoIdFromJSFile})
             console.log('Review Todo')
             res.json('Review It')
         }catch(err){

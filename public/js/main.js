@@ -1,8 +1,8 @@
 const deleteBtn = document.querySelectorAll('.del')
 const reviewBtn = document.querySelectorAll('.rev')
 const answerBtn = document.querySelectorAll('.ans')
-// const todoItem = document.querySelectorAll('span.not')
-// const todoComplete = document.querySelectorAll('span.completed')
+const saveAnsBtn = document.querySelectorAll("[id^='saveAns']")
+let btnArray = new Set()
 
 Array.from(deleteBtn).forEach((el)=>{
     el.addEventListener('click', deleteTodo)
@@ -13,13 +13,15 @@ Array.from(reviewBtn).forEach((el)=>{
 })
 
 Array.from(answerBtn).forEach((el)=>{
+    el.addEventListener('click', showAnswerBox)
+})
+
+Array.from(saveAnsBtn).forEach((el)=>{
     el.addEventListener('click', answerTodo)
 })
 
-async function deleteTodo(){
+async function deleteTodo(){//delete question
     const todoId = this.parentNode.dataset.id
-    console.log('Clicked')
-    console.log(JSON.stringify(this.parentNode.dataset))
     try{
         const response = await fetch('todos/deleteTodo', {
             method: 'delete',
@@ -36,22 +38,47 @@ async function deleteTodo(){
     }
 }
 
+function showAnswerBox(){
+  let id = this.parentNode.dataset.id
+  if (btnArray.has(id)){
+    btnArray.delete(id)  
+  }
+  btnArray.forEach(i => {
+    document.getElementById('qAns'+i).style.display = 'none'
+    document.getElementById('saveAns'+i).style.display = 'none'
+  })  
+  btnArray.add(id)
+  document.getElementById('qAns'+id).style.display = ''
+  document.getElementById('saveAns'+id).style.display = ''
+  document.getElementById('qAns'+id).focus()
+}
+
 async function answerTodo(){
     const todoId = this.parentNode.dataset.id
-    toggle('qAns'+todoId)
-    try{
-        const response = await fetch('todos/answerTodo', {
-            method: 'put',
-            headers: {'Content-type': 'application/json'},
-            body: JSON.stringify({
-                'todoIdFromJSFile': todoId
+    let txtAreaVal = document.getElementById('qAns'+todoId).value
+    let id = JSON.stringify(this.parentNode.dataset)
+    console.log(id)
+    if(txtAreaVal){
+        try{
+            const response = await fetch('todos/answerTodo', {
+                method: 'put',
+                headers: {'Content-type': 'application/json'},
+                body: JSON.stringify({
+                    //'id': id,
+                    'todoIdFromJSFile' : todoId,
+                    'respTextArea': txtAreaVal
+                })
             })
-        })
-        const data = await response.json()
-        console.log(data)
-        location.reload()
-    }catch(err){
-        console.log(err)
+            console.log(response)
+            const data = await response.json()
+            console.log(data)
+            location.reload()
+        }catch(err){
+            console.log(err)
+        }
+    }else{
+       document.getElementById('qAns'+todoId).style.display = 'none'
+       document.getElementById('saveAns'+todoId).style.display = 'none'
     }
 }
 
@@ -73,10 +100,10 @@ async function reviewTodo(){
     }
 }
 
-function toggle(x) {
-	if (document.getElementById(x).style.display == 'none') {
-		document.getElementById(x).style.display = '';
-	} else {
-		document.getElementById(x).style.display = 'none';
-	}
-}
+// function toggle(x) {
+// 	if (document.getElementById(x).style.display == 'none') {
+// 		document.getElementById(x).style.display = '';
+// 	} else {
+// 		document.getElementById(x).style.display = 'none';
+// 	}
+// }
