@@ -30,18 +30,21 @@ module.exports = {
         try{
            const n = await User.find({_id:req.user._id}).select('questions')
 
-            let newQ = await Question.create({
-                question: req.body.todoItem, 
-                response: req.body.newAns,
-                qtype: 'undefined',
-                qsource: 'self'
-            })
+            // let newQ = await Question.create({
+            //     question: req.body.todoItem, 
+            //     response: req.body.newAns,
+            //     qtype: 'undefined',
+            //     qsource: 'self'
+            // })
 
             await User.updateOne(
                 { "_id": req.user.id },
                 {
                     $push: {
-                        questions: newQ
+                        questions: {question: req.body.todoItem, 
+                            response: req.body.newAns,
+                            qtype: 'undefined',
+                            qsource: 'self'}
                     }
                 }
             );
