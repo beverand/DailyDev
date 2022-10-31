@@ -67,7 +67,7 @@ module.exports = {
             await User.findOneAndUpdate(
                 {_id: req.user.id , "questions._id": req.body.todoIdFromJSFile } ,
                   {
-                    $set: {"questions.response": req.body.respTextArea}
+                    $set: {"questions.$.response": req.body.respTextArea}
                   }
             )
             console.log('Answer Todo')
