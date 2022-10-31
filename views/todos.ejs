@@ -11,6 +11,7 @@
     <header>
         <h1>Questions</h1>
         <h2><%= user.userName %> has <%= total %> total, with <%= left %> answered.</h2>
+        <!-- <span class='rev'> Review </span> -->
         <a href="/logout" class="logout ansBtn">Logout</a>
     </header>       
     <ul>
@@ -19,7 +20,6 @@
                     <span> <%= el.qtype %> </span>
                     <span class='<%= el.response ? 'completed' : 'not'%>'><%= el.todo %></span>
                     <span class='ans'> Answer </span>
-                    <span class='rev'> Review </span>
                     <span class='<%= el.qsource == 'self' ? 'completed del' : 'hidden'%>'> Delete </span>
                     <br>
                 <textarea id="qAns<%= el._id %>" name="qAns" rows="5" cols="60" class="questionForm" style="display:none;"><%= el.response %></textarea>
