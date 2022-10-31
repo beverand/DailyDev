@@ -10,6 +10,7 @@ const UserSchema = new mongoose.Schema({
   dailyEffortEmail: {Boolean, default: false},
   questions : [ {question: {
                 type: String,
+                unique : true,
                 required: true,
               },
               qtype: {
