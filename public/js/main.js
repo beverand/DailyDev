@@ -55,7 +55,7 @@ function showAnswerBox(){
 
 async function answerTodo(){
     const todoId = this.parentNode.dataset.id
-    let txtAreaVal = document.getElementById('qAns'+todoId).value
+    let txtAreaVal = document.getElementById('qAns'+todoId).value.trim()
     let id = JSON.stringify(this.parentNode.dataset)
     console.log(id)
     if(txtAreaVal){
