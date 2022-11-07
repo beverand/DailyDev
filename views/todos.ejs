@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="icon" type="image/png" href="http://www.mozilla.org/favicon.ico"/>
+    <!-- <meta http-equiv="Cache-Control" content="no-cache"/>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self';"/> -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -12,6 +15,7 @@
         <h1>Questions</h1>
         <h2><%= user.userName %> has <%= total %> total, with <%= left %> answered.</h2>
         <!-- <span class='rev'> Review </span> -->
+        <a href="/profile" class="profile ansBtn">Profile</a>
         <a href="/logout" class="logout ansBtn">Logout</a>
     </header>       
     <ul>

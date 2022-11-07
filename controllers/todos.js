@@ -79,6 +79,14 @@ module.exports = {
             console.log(err)
         }
     },
+    getProfile: async (req, res) => {
+        try {
+          const userinfo = await User.find({_id:req.user._id});
+          res.render("profile.ejs", { user: req.user });
+        } catch (err) {
+          console.log(err);
+        }
+      },
     reviewTodo: async (req, res)=>{
         console.log(req.body.todoIdFromJSFile)
         try{

@@ -2,6 +2,7 @@ const deleteBtn = document.querySelectorAll('.del')
 const reviewBtn = document.querySelectorAll('.rev')
 const answerBtn = document.querySelectorAll('.ans')
 const saveAnsBtn = document.querySelectorAll("[id^='saveAns']")
+const profileBtn =  document.querySelector('.profile')
 let btnArray = new Set()
 
 Array.from(deleteBtn).forEach((el)=>{
@@ -19,6 +20,8 @@ Array.from(answerBtn).forEach((el)=>{
 Array.from(saveAnsBtn).forEach((el)=>{
     el.addEventListener('click', answerTodo)
 })
+
+profileBtn.addEventListener('click', getProfile)
 
 async function deleteTodo(){//delete question
     const todoId = this.parentNode.dataset.id
@@ -81,6 +84,24 @@ async function answerTodo(){
        document.getElementById('saveAns'+todoId).style.display = 'none'
     }
 }
+
+ async function getProfile(){
+//     const todoId = this.parentNode.dataset.id
+//     try{
+//         const response = await fetch('todos/getProfile', {
+//             method: 'get',
+//             headers: {'Content-type': 'application/json'},
+//             body: JSON.stringify({
+//                 'todoIdFromJSFile': todoId
+//             })
+//         })
+//         const data = await response.json()
+//         console.log(data)
+//         location.reload()
+//     }catch(err){
+//         console.log(err)
+//     }
+ }
 
 async function reviewTodo(){
     const todoId = this.parentNode.dataset.id
