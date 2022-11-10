@@ -20,7 +20,7 @@ module.exports = {
                 o.push(dataObject);                             
             }
             let todoItem = o
-            res.render('todos.ejs', {todos: todoItem, total: n[0].questions.length, user: req.user, left: n[0].questions.length - itemsLeft})
+            res.render('todos', {todos: todoItem, total: n[0].questions.length, user: req.user, left: n[0].questions.length - itemsLeft})
         }catch(err){
             console.log(err)
         }
