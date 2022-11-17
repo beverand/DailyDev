@@ -11,12 +11,12 @@
     <a href="/login"> Login</a>
     <a href="/signup"> Signup</a>
     <br>
-    <form>
+    <form class="questionForm">
     <% if(question.length){
         for(var i = 0; i< question.length; i++) {%> 
           <h4><%= question[i].qtype%></h4> 
           <p><%= (i+1) %> <%= question[i].question%></p>
-          <textarea rows = "5" cols = "50" name = "answer" placeholder="Sign up or your answer won't be saved">
+          <textarea name="answer" rows="5" cols="60" class="questionForm" placeholder="Sign up or your answer won't be saved">
          </textarea>
         <% }
          }else{ %>
