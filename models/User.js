@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
+mongoose.Schema.Types.String.set('trim', true);
 const Questions = require('./Question')
 
 const UserSchema = new mongoose.Schema({
