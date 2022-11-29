@@ -1,4 +1,4 @@
-body{        
+body .question_page {        
     padding-top: 170px;
 }
 h1{
@@ -20,6 +20,15 @@ h1{
     padding: 3px;
     border-radius: 10px;
     background-color: lightblue;
+    text-decoration: none;
+}
+
+.signBtn{
+    border: 1px solid black;
+    padding: 3px;
+    border-radius: 10px;
+    background-color: lightsalmon;
+    text-decoration: none;
 }
 
 .questionForm{
