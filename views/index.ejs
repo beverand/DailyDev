@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
     <title>Document</title>
 </head>
-<body>
-    <h1>Manage your interview test bank</h1>
-    <a href="/login"> Login</a>
-    <a href="/signup"> Signup</a>
+<body class="index_page">
+    <h2>Manage your interview test bank</h2>
+    <a href="/login" class="ansBtn"> Login</a>
+    <a href="/signup" class="signBtn"> Signup</a>
     <br>
     <form class="questionForm">
     <% if(question.length){
@@ -25,7 +26,7 @@
              </tr>
           <% } %>
           <br>
-          <input type = "submit" value = "submit" />
+          <input type = "submit" value = "submit" class="ansBtn"/>
         </form>       
 </body>
 </html>
