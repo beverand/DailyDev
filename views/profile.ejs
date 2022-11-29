@@ -12,6 +12,11 @@
     <header>
         <a href="/logout" class="logout ansBtn">Logout</a>
     </header>
-    <h1>Profile</h1>
+    <h1>Profile <%=user.userName%> </h1>
+    <p>
+        Set random <input type="number" min="3" max="5"> respond
+        <br>
+        Set random <input type="number" min="1" max="<%= user.left %>"> review
+    </p>
 </body>
 </html>
