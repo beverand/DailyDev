@@ -7,7 +7,9 @@ const UserSchema = new mongoose.Schema({
   userName: { type: String, unique: true },
   email: { type: String, unique: true },
   password: String,
-  randomReview: {Boolean, default: false},
+  randomReview: {type: Boolean, default: false},
+  randomReviewQs: {type: Number, default: 3, min: 3, max: 5},
+  randomReviewRs: {type: Number, default: 3, min: 3},
   dailyEffortEmail: {Boolean, default: false},
   questions : [ {question: {
                 type: String,
@@ -25,6 +27,10 @@ const UserSchema = new mongoose.Schema({
                 type: String,
                 required: false,
                 default: ''
+              },
+              lastReviewDate:{
+                type: Date,
+                required: false                
               }}]
 })
 
