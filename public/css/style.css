@@ -1,9 +1,17 @@
-body .question_page {        
-    padding-top: 170px;
+.question_page {        
+    /* padding-top: 270px; */
+    display: flex;
+    flex-direction: column;
 }
+
 h1{
     color: red;
 }
+
+h2{
+    padding: 2px;
+}
+
 .completed{
     text-decoration: none;
     color:black;
@@ -53,5 +61,20 @@ header{
 }
 
 .profile{
+    padding: 5px;
+}
+
+/* .qPageHeader{
+    display: flex;
+    flex-direction: column;
+} */
+
+ul{
+    list-style-type: none;
+    padding: 1px;
+}
+
+nav > ul > li{
+    display: inline-block;
     padding: 5px;
 }

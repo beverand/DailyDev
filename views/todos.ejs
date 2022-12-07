@@ -11,13 +11,26 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="questions_page">
-    <header>
-        <h1>Questions</h1>
-        <h2><%= user.userName %> has <%= total %> total, with <%= left %> answered.</h2>
-        <!-- <span class='rev'> Review </span> -->
-        <a href="/profile" class="profile ansBtn">Profile</a>
-        <a href="/logout" class="logout ansBtn">Logout</a>
+    <header class="qPageHeader">
+        <p><%= user.userName %></p>
+        <h2><%= total %> questions, with <%= left %> answered.</h2>
+        <nav>
+            <ul class="q-view">
+                <li>
+                    <a href="/profile" class="profile ansBtn">Profile</a>
+                </li>
+                <li>All</li>
+                <li>Answered</li>
+                <li>Unanswered</li>
+                <li>
+                    <a href="/logout" class="logout ansBtn">Logout</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- <span class='rev'> Review </span> -->      
     </header>       
+    <!-- <br><br><br><br><br><br><br> -->
+    <section>
     <ul>
     <% todos.forEach( el => { %>
             <li class='todoItem' data-id='<%=el._id%>'>   
@@ -31,7 +44,7 @@
             </li>
     <% }) %>    
     </ul>
-
+    </section>
     <form action="/todos/createTodo" method='POST' class='<%= total < 200 ? 'completed' : 'hidden'%>'>
         <input type="text" placeholder="Enter Question" name='todoItem' width="100px" class="questionForm">
        <br>

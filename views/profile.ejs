@@ -10,13 +10,20 @@
 </head>
 <body>
     <header>
+        <a href="/todos" class="logout signBtn">Questions</a>
         <a href="/logout" class="logout ansBtn">Logout</a>
     </header>
     <h1>Profile <%=user.userName%> </h1>
     <p>
-        Set random <input type="number" min="3" max="5"> respond
-        <br>
-        Set random <input type="number" min="1" max="<%= user.left %>"> review
+        <form>
+            <% let checked = user.randomReview ? "checked" : "" %>
+            <p class="randomReview">Random Review <input type="checkbox" name="randomReview" placeholder="Email" <%= checked %>>
+                <span class="tooltiptext_randomReview">Check Random review to see the specified number of questions each day.</span>        
+            </p>
+            <p>Set random <input type="number" min="3" max="5"> respond</p>
+            <p>Set random <input type="number" min="1" max="<%= user.left %>"> review</p>
+            <input type="submit">
+        </form>
     </p>
 </body>
 </html>
